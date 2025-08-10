@@ -22,7 +22,30 @@
     <link href="css/responsive.css" rel="stylesheet">
 
 </head>
+<style>
+    .header_area {
+  position: relative;
+  overflow: hidden;
+  height: 300px; /* apne design ke mutabiq adjust karein */
+  animation: zoomInOut 10s ease-in-out infinite;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+@keyframes zoomInOut {
+  0% {
+    background-size: 100%;
+  }
+  50% {
+    background-size: 110%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
+</style>
 <body>
     <div class="catagories-side-menu">
         <!-- Close Icon -->

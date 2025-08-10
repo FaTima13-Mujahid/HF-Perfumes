@@ -22,7 +22,30 @@
     <link href="css/responsive.css" rel="stylesheet">
 
 </head>
+<style>
+    .header_area {
+  position: relative;
+  overflow: hidden;
+  height: 300px; /* apne design ke mutabiq adjust karein */
+  animation: zoomInOut 10s ease-in-out infinite;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+@keyframes zoomInOut {
+  0% {
+    background-size: 100%;
+  }
+  50% {
+    background-size: 110%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
+</style>
 <body>
     <div class="catagories-side-menu">
         <!-- Close Icon -->
@@ -224,7 +247,7 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-5">
                                         <div class="quickview_pro_img">
-                                            <img src="img/product-img/product-1.jpg" alt="">
+                                            <img  id="modal-image" src="img/product-img/product-1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-7">
@@ -463,7 +486,7 @@ window.open(url, '_blank');
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body text-center">
-                <img id="modal-img" src="" alt="" class="img-fluid mb-3">
+                <img id="modal-image" src="" alt="" class="img-fluid mb-3">
                 <div class="btn-group mb-3" role="group">
                     <button type="button" class="btn btn-outline-primary size-btn active" onclick="changeSizeModal('50ml', currentProduct)">50ml</button>
                     <button type="button" class="btn btn-outline-primary size-btn" onclick="changeSizeModal('100ml', currentProduct)">100ml</button>
@@ -554,6 +577,7 @@ function changeSizeModal(size, id) {
     
     // Update title with size
     document.getElementById("modal-title").textContent = `${p.name} — ${size}`;
+document.getElementById("modal-image").src = p.image;  // ya jo bhi image ka path ho
 
     // Update price
     document.getElementById("modal-price").textContent = `PKR ${p.prices[size]}`;
@@ -687,7 +711,7 @@ function changeSizeModal(size, id) {
             </div>
         </footer>
         <!-- ****** Footer Area End ****** -->
-    </div>
+    <!-- </div> -->
     <!-- /.wrapper end -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
