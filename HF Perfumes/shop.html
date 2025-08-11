@@ -247,7 +247,7 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-5">
                                         <div class="quickview_pro_img">
-                                            <img  id="modal-image" src="img/product-img/product-1.jpg" alt="">
+                                            <img  id="modal-img" src="img/product-img/product-1.jpg" alt="">
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-7">
@@ -264,9 +264,9 @@
                                           <h5  id="modal-price"></h5>
                            
                             <p id="modal-desc"></p>
-                              <div class="size-selector btn-group" role="group" aria-label="Size selector">
-    <button type="button" class="btn btn-dark active" onclick="changeSizeModal('50ml', currentProduct)">50ml</button>
-    <button type="button" class="btn btn-danger" onclick="changeSizeModal('100ml', currentProduct)">100ml</button>
+                           <div class="size-selector btn-group" role="group" aria-label="Size selector">
+    <button type="button" class="btn btn-dark size-btn active" onclick="changeSizeModal('50ml', currentProduct, this)">50ml</button>
+    <button type="button" class="btn btn-danger size-btn" onclick="changeSizeModal('100ml', currentProduct, this)">100ml</button>
 </div>
 
   </div>
@@ -307,41 +307,37 @@
                                                 }
                                             }
                                         
-                                           function sendToWhatsApp() {
-    console.log("Function called!");
-
+                                         
+                                      function sendToWhatsApp() {
     if (currentProduct === null) {
         alert("No product selected!");
         return;
     }
 
     const p = products[currentProduct];
-    const qtyEl = document.getElementById('qty');
-    const qty = qtyEl ? qtyEl.value : 1;
-    const activeSizeBtn = document.querySelector('.size-btn.active');
-    const activeSize = activeSizeBtn ? activeSizeBtn.textContent.trim() : '50ml';
-    const price = p.prices[activeSize];
+    const qty = document.getElementById('qty').value || 1;
+    const price = p.prices[selectedSize];
 
+    // ✅ Public URL generate karein
     let fullImageUrl = window.location.origin + "/" + p.image.replace(/^\/+/, '');
-let message = 
-    `📦 *----HF Perfumes ----*\n` +
-    `🛍 Product: ${p.name}\n` +
-    `📏 Size: ${activeSize}\n` +
-    `💰 Price: PKR ${price}\n` +
-    `📦 Quantity: ${qty}\n` +
-    `🖼  Image: ${p.image}`
- +
-    `\nI want to buy this product. Please contact me!`;
+    
+    // ✅ WhatsApp message
+    let message = 
+        `📦 *----HF Perfumes ----*\n` +
+        `🛍 Product: ${p.name}\n` +
+        `📏 Size: ${selectedSize}\n` +
+        `💰 Price: PKR ${price}\n` +
+        `📦 Quantity: ${qty}\n` +
+        `🖼 ${fullImageUrl}\n` + // ✅ Public link, preview banega
+        `I want to buy this product. Please contact me!`;
 
-let phone = "923283562969";
-let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-window.open(url, '_blank');
+    let phone = "923283562969";
+    let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-    console.log(url); // for debugging
     window.open(url, '_blank');
 }
 
-                                        </script>
+ </script>
                                         
 
                                       
@@ -488,9 +484,9 @@ window.open(url, '_blank');
             <div class="modal-body text-center">
                 <img id="modal-image" src="" alt="" class="img-fluid mb-3">
                 <div class="btn-group mb-3" role="group">
-                    <button type="button" class="btn btn-outline-primary size-btn active" onclick="changeSizeModal('50ml', currentProduct)">50ml</button>
-                    <button type="button" class="btn btn-outline-primary size-btn" onclick="changeSizeModal('100ml', currentProduct)">100ml</button>
-                </div>
+                   <button class="size-btn active" onclick="changeSizeModal('50ml', currentProduct, this)">50ml</button>
+<button class="size-btn" onclick="changeSizeModal('100ml', currentProduct, this)">100ml</button>
+  </div>
                 <h4 id="modal-price" class="mb-3"></h4>
                 <p id="modal-desc"></p>
             </div>
@@ -539,7 +535,7 @@ const products = {
 };
 
 let currentProduct = null;
-
+let activeSize = "50ml"; // default size
 // Inject product cards into page
 const productList = document.getElementById('product-list');
 for (let id in products) {
@@ -571,26 +567,20 @@ function openQuickview(id) {
     document.getElementById("modal-img").src = p.image;
     changeSizeModal('50ml', id); // default size
 }
+let selectedSize = "50ml"; // default selected size
 
-function changeSizeModal(size, id) {
+function changeSizeModal(size, id, el) {
     const p = products[id];
-    
-    // Update title with size
+    selectedSize = size; // ✅ global variable update
+
     document.getElementById("modal-title").textContent = `${p.name} — ${size}`;
-document.getElementById("modal-image").src = p.image;  // ya jo bhi image ka path ho
-
-    // Update price
+    document.getElementById("modal-img").src = p.image;
     document.getElementById("modal-price").textContent = `PKR ${p.prices[size]}`;
-    
-    // Update description with size info
-    document.getElementById("modal-desc").innerHTML = `
-        <strong>${size} bottle</strong><br>
-        ${p.desc}
-    `;
+    document.getElementById("modal-desc").innerHTML = `<strong>${size} bottle</strong><br>${p.desc}`;
 
-    // Active button state
+    // ✅ active button change
     document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
+    if (el) el.classList.add('active');
 }
 
 </script>

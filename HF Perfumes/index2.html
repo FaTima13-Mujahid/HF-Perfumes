@@ -217,7 +217,7 @@
 
         <!-- ****** Welcome Slides Area Start ****** -->
          <!-- Video Background Slide -->
-<div class="single_slide height-800 background-overlay position-relative overflow-hidden p-0">
+       <div class="single_slide height-800 background-overlay position-relative overflow-hidden p-0">
     
     <!-- Fullscreen Video Background -->
     <video autoplay muted loop playsinline
@@ -246,7 +246,7 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
         <section class="welcome_area">
             <div class="welcome_slides owl-carousel">
@@ -322,7 +322,8 @@
         <!-- ****** Top Catagory Area End ****** -->
 
         <!-- ****** Quick View Modal Area Start ****** -->
-        <div class="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
+       <!-- Your Existing Modal -->
+         <div class="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
@@ -340,7 +341,8 @@
                                     </div>
                                     <div class="col-12 col-lg-7">
                                         <div class="quickview_pro_des">
-                                            <h4 class="title">DusK blosoom</h4>
+                                             <h4 class="title" id="modal-title"></h4>
+                                           
                                             <div class="top_seller_product_rating mb-15">
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -348,13 +350,17 @@
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                                 <i class="fa fa-star" aria-hidden="true"></i>
                                             </div>
-                                            <h5 class="price">PKR 1,500</h5>
-                                           <p>
-Experience the irresistible charm of <strong>HF Perfumes</strong> — a premium blend crafted for elegance and lasting freshness.  
-Available in <strong>50ml</strong> & <strong>100ml</strong> bottles, this signature fragrance combines fresh floral notes with a hint of warm musk, perfect for every occasion.  
-Long-lasting, luxurious, and made to leave an unforgettable impression.
-</p>
+                                          <h5  id="modal-price"></h5>
+                           
+                            <p id="modal-desc"></p>
+                              <div class="size-selector btn-group" role="group" aria-label="Size selector">
+    <button type="button" class="btn btn-dark active" onclick="changeSizeModal('50ml', currentProduct)">50ml</button>
+    <button type="button" class="btn btn-danger" onclick="changeSizeModal('100ml', currentProduct)">100ml</button>
+</div>
+
   </div>
+
+
                                         <!-- Add to Cart Form -->
                                         <form class="cart" onsubmit="sendToWhatsApp(); return false;">
                                             <div class="quantity">
@@ -390,26 +396,44 @@ Long-lasting, luxurious, and made to leave an unforgettable impression.
                                                 }
                                             }
                                         
-                                            function sendToWhatsApp() {
-                                                var qty = document.getElementById('qty').value;
-                                                var message = `📦 *New Product Inquiry*\nI want to buy this product.\nQuantity: ${qty}\nPlease contact me!`;
-                                                var phone = "923283562969"; // aapka WhatsApp number (without +)
-                                        
-                                                var url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-                                                window.open(url, '_blank');
-                                            }
+                                           function sendToWhatsApp() {
+    console.log("Function called!");
+
+    if (currentProduct === null) {
+        alert("No product selected!");
+        return;
+    }
+
+    const p = products[currentProduct];
+    const qtyEl = document.getElementById('qty');
+    const qty = qtyEl ? qtyEl.value : 1;
+    const activeSizeBtn = document.querySelector('.size-btn.active');
+    const activeSize = activeSizeBtn ? activeSizeBtn.textContent.trim() : '50ml';
+    const price = p.prices[activeSize];
+
+    let fullImageUrl = window.location.origin + "/" + p.image.replace(/^\/+/, '');
+let message = 
+    `📦 *----HF Perfumes ----*\n` +
+    `🛍 Product: ${p.name}\n` +
+    `📏 Size: ${activeSize}\n` +
+    `💰 Price: PKR ${price}\n` +
+    `📦 Quantity: ${qty}\n` +
+    `🖼  Image: ${p.image}`
+ +
+    `\nI want to buy this product. Please contact me!`;
+
+let phone = "923283562969";
+let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+window.open(url, '_blank');
+
+    console.log(url); // for debugging
+    window.open(url, '_blank');
+}
+
                                         </script>
                                         
 
-                                        <div class="share_wf mt-30">
-                                            <p>Share With Friend</p>
-                                            <div class="_icon">
-                                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -418,10 +442,11 @@ Long-lasting, luxurious, and made to leave an unforgettable impression.
                 </div>
             </div>
         </div>
+    
         <!-- ****** Quick View Modal Area End ****** -->
 
         <!-- ****** New Arrivals Area Start ****** -->
-        <section class="new_arrivals_area section_padding_100_0 clearfix">
+       <section class="new_arrivals_area section_padding_100_0 clearfix">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -444,115 +469,137 @@ Long-lasting, luxurious, and made to leave an unforgettable impression.
             </div>
 
             <div class="container">
-                <div class="row karl-new-arrivals">
+                <!-- CARDS  ka DATAAA -->
+              
+<div class="row karl-new-arrivals" id="product-list">
+    <!-- Products will be injected here by JS -->
 
-                    <!-- Single gallery Item Start -->
-                    <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.2s">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="img/product-img/product-1.jpg" alt="">
-                            <div class="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price">PKR 4,500</h4>
-                            <p>Dusk Blossom</p>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
 
-                    <!-- Single gallery Item Start -->
-                    <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.3s">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="img/product-img/product-1.jpg" alt="">
-                            <div class="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price">PKR 4,500</h4>
-                            <p>Dusk Blossom</p>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
+<!-- Modal -->
+<div class="modal fade" id="quickview" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modal-img" src="" alt="" class="img-fluid mb-3">
+                <div class="btn-group mb-3" role="group">
+                    <button type="button" class="btn btn-outline-primary size-btn active" onclick="changeSizeModal('50ml', currentProduct)">50ml</button>
+                    <button type="button" class="btn btn-outline-primary size-btn" onclick="changeSizeModal('100ml', currentProduct)">100ml</button>
+                </div>
+                <h4 id="modal-price" class="mb-3"></h4>
+                <p id="modal-desc"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    <!-- Single gallery Item Start -->
-                    <div class="col-12 col-sm-6 col-md-4 single_gallery_item access wow fadeInUpBig" data-wow-delay="0.4s">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="img/product-img/product-1.jpg" alt="">
-                            <div class="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price">PKR 4,500</h4>
-                            <p>Dusk Blossom</p>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
+<script>
+const products = {
+    1: {
+        name: "Dusk Blossom",
+        image: "img/product-img/product-1.jpg",
+        desc: "Indulge in the irresistible elegance of HF Perfumes, crafted for those who appreciate true sophistication.<br><br>Encased in a luxuriously designed glass bottle and delivered in a premium gift pouch, this fragrance is more than just a scent — it’s a statement.<br><br>Perfect for every occasion, its long-lasting formula ensures you remain captivating from day to night.<br><strong>HF Perfumes — where style meets timeless allure.</strong>",
+        prices: { "50ml": 1500, "100ml": 3000 }
+    },
+    2: {
+        name: "Midnight Musk",
+        image: "img/product-img/product-2.jpg",
+        desc: "Immerse yourself in the deep allure of Midnight Musk — a bold yet refined fragrance.<br><br>Rich amber and warm spices intertwine in an elegantly crafted bottle, paired with a premium gift pouch.<br><br>Ideal for evening wear, leaving a trail of intrigue and sophistication.<br><strong>HF Perfumes — your signature after dark.</strong>",
+        prices: { "50ml": 1800, "100ml": 3500 }
+    },
+    3: {
+        name: "Floral Whisper",
+        image: "img/product-img/product-1.jpg",
+        desc: "Floral Whisper captures the gentle romance of blooming petals.<br><br>Presented in a graceful glass bottle and premium pouch, its floral heart is balanced with a hint of soft musk.<br><br>Perfect for adding elegance to everyday moments.<br><strong>HF Perfumes — whisper your charm.</strong>",
+        prices: { "50ml": 1700, "100ml": 3200 }
+    },
+    4: {
+        name: "Golden Aura",
+        image: "img/product-img/product-2.jpg",
+        desc: "Golden Aura glows with the warmth of golden amber and sweet vanilla.<br><br>Luxuriously bottled and delivered in a premium gift pouch, it radiates charm and sophistication.<br><br>A fragrance that turns moments into memories.<br><strong>HF Perfumes — the glow of elegance.</strong>",
+        prices: { "50ml": 2000, "100ml": 4000 }
+    },
+    5: {
+        name: "Velvet Breeze",
+        image: "img/product-img/product-1.jpg",
+        desc: "Velvet Breeze offers a refreshing blend of jasmine and sandalwood.<br><br>Housed in an elegant glass bottle and premium gift pouch, it’s designed for timeless appeal.<br><br>Fresh, smooth, and unforgettable.<br><strong>HF Perfumes — breathe the elegance.</strong>",
+        prices: { "50ml": 1600, "100ml": 3100 }
+    },
+    6: {
+        name: "Amber Horizon",
+        image: "img/product-img/product-2.jpg",
+        desc: "Amber Horizon paints the senses with notes of warm amber and delicate citrus.<br><br>Encased in a sleek glass bottle and delivered in a luxurious pouch, it’s the perfect companion for both day and night.<br><br>Confident, radiant, and unforgettable.<br><strong>HF Perfumes — your horizon of charm.</strong>",
+        prices: { "50ml": 1900, "100ml": 3800 }
+    }
+};
 
-                    <!-- Single gallery Item Start -->
-                    <div class="col-12 col-sm-6 col-md-4 single_gallery_item shoes wow fadeInUpBig" data-wow-delay="0.5s">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="img/product-img/product-1.jpg" alt="">
-                            <div class="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price">PKR 4,500</h4>
-                            <p>Dusk Blossom</p>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
+let currentProduct = null;
 
-                    <!-- Single gallery Item Start -->
-                    <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" data-wow-delay="0.6s">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="img/product-img/product-5.jpg" alt="">
-                            <div class="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price">PKR 4,500</h4>
-                            <p>Dusk Blossom</p>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
+// Inject product cards into page
+const productList = document.getElementById('product-list');
+for (let id in products) {
+    let p = products[id];
+    productList.innerHTML += `
+        <div class="col-12 col-sm-6 col-md-4 single_gallery_item">
+            <div class="product-img">
+                <img src="${p.image}" alt="${p.name}">
+                <div class="product-quicview">
+                    <a href="javascript:void(0)" onclick="openQuickview(${id})" data-toggle="modal" data-target="#quickview">
+                        <i class="ti-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="product-description">
+                <h4 class="product-price">PKR ${p.prices["50ml"]}</h4>
+                <p>${p.name}</p>
+                <a href="#" class="add-to-cart-btn">ADD TO CART</a>
+            </div>
+        </div>
+    `;
+}
 
-                    <!-- Single gallery Item -->
-                    <div class="col-12 col-sm-6 col-md-4 single_gallery_item kids man wow fadeInUpBig" data-wow-delay="0.7s">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="img/product-img/product-1.jpg" alt="">
-                            <div class="product-quicview">
-                                <a href="#" data-toggle="modal" data-target="#quickview"><i class="ti-plus"></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price">PKR 4,500</h4>
-                            <p>Dusk Blossom</p>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn">ADD TO CART</a>
-                        </div>
-                    </div>
+// Modal Functions
+function openQuickview(id) {
+    const p = products[id];
+    currentProduct = id;
+    document.getElementById("modal-title").textContent = p.name;
+    document.getElementById("modal-img").src = p.image;
+    changeSizeModal('50ml', id); // default size
+}
+
+function changeSizeModal(size, id) {
+    const p = products[id];
+    
+    // Update title with size
+    document.getElementById("modal-title").textContent = `${p.name} — ${size}`;
+
+    // Update price
+    document.getElementById("modal-price").textContent = `PKR ${p.prices[size]}`;
+    
+    // Update description with size info
+    document.getElementById("modal-desc").innerHTML = `
+        <strong>${size} bottle</strong><br>
+        ${p.desc}
+    `;
+
+    // Active button state
+    document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+}
+
+</script>
+
+
+</div>
+
+
+
+
+
+                 
                 </div>
             </div>
         </section>
@@ -570,7 +617,7 @@ Long-lasting, luxurious, and made to leave an unforgettable impression.
                                 <h3><span class="regular-price">Rs. 4,500</span> Rs. 2,999</h3>
                             </div>
                             
-                            <a href="#" class="btn karl-btn mt-30">Shop Now</a>
+                            <a href="index.html" class="btn karl-btn mt-30">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -738,7 +785,7 @@ Long-lasting, luxurious, and made to leave an unforgettable impression.
             </div>
         </footer>
         <!-- ****** Footer Area End ****** -->
-    </div>
+  
     <!-- /.wrapper end -->
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
