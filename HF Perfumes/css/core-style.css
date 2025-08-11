@@ -203,7 +203,7 @@ img {
     margin-bottom: 100px;
 }
 
-.bg-imgg {
+.bg-img {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -1188,7 +1188,7 @@ img {
 }
 
 .offer-content-area {
-    background-color: rgba(58, 58, 58, 0.7);
+    background-color: rgba(85, 81, 81, 0.7);
     padding: 100px 50px 50px;
     position: relative;
     z-index: 1;
@@ -1210,7 +1210,7 @@ img {
     font-size: 11px;
     text-transform: uppercase;
     font-weight: 700;
-    background-color: #030d1c;
+    background-color: #1c0303;
     padding: 3px 10px;
     top: -30px;
     left: 10px;
