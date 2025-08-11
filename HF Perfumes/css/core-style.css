@@ -1182,6 +1182,9 @@ img {
 .offer_area {
     position: relative;
     z-index: 1;
+     background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .offer-content-area {
