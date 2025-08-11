@@ -203,7 +203,7 @@ img {
     margin-bottom: 100px;
 }
 
-.bg-img {
+.bg-imgg {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -2100,4 +2100,24 @@ img {
     font-size: 12px;
     line-height: 2;
     color: #9f9f9f;
+}
+.slider-box {
+    width: 900px; /* ✅ fixed container width for 4 images */
+    margin: auto;
+   
+    overflow: hidden;
+   padding: 10px;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-track img {
+    width: 300px;  /* ✅ fixed width */
+    height: 300px; /* ✅ fixed height */
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 1px;
 }

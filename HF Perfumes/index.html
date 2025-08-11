@@ -24,63 +24,7 @@
 </head>
 
 <body>
-      <div class="catagories-side-menu">
-        <!-- Close Icon -->
-        <div id="sideMenuClose">
-            <i class="ti-close"></i>
-        </div>
-        <!--  Side Nav  -->
-        <div class="nav-side-menu">
-            <div class="menu-list">
-                <h6>Perfume Categories</h6>
-                <ul id="menu-content" class="menu-content collapse out">
-            
-                    <!-- Women's Perfumes -->
-                    <li data-toggle="collapse" data-target="#womenPerfumes" class="collapsed active">
-                        <a href="#">Women's Perfumes <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="womenPerfumes">
-                            <li><a href="women.html">Floral Scents</a></li>
-                            <li><a href="#">Fresh & Fruity</a></li>
-                            <li><a href="#">Evening Perfumes</a></li>
-                            <li><a href="#">Long Lasting</a></li>
-                        </ul>
-                    </li>
-            
-                    <!-- Men's Perfumes -->
-                    <li data-toggle="collapse" data-target="#menPerfumes" class="collapsed">
-                        <a href="#">Men's Perfumes <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="menPerfumes">
-                            <li><a href="men.html">Woody & Musk</a></li>
-                            <li><a href="#">Fresh & Sporty</a></li>
-                            <li><a href="#">Luxury Perfumes</a></li>
-                        </ul>
-                    </li>
-            
-                    <!-- Unisex / Mix Perfumes -->
-                    <li data-toggle="collapse" data-target="#unisexPerfumes" class="collapsed">
-                        <a href="#">Unisex Perfumes <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="unisexPerfumes">
-                            <li><a href="#">Citrus & Fresh</a></li>
-                            <li><a href="#">Signature Blends</a></li>
-                            <li><a href="#">Limited Editions</a></li>
-                        </ul>
-                    </li>
-            
-                    <!-- Other Categories -->
-                    <li data-toggle="collapse" data-target="#otherPerfumes" class="collapsed">
-                        <a href="#">More Categories <span class="arrow"></span></a>
-                        <ul class="sub-menu collapse" id="otherPerfumes">
-                            <li><a href="#">Attars / Ittar</a></li>
-                            <li><a href="#">Body Mists</a></li>
-                            <li><a href="#">Gift Boxes</a></li>
-                        </ul>
-                    </li>
-            
-                </ul>
-            </div>
-            
-        </div>
-    </div>
+    
       <div id="wrapper">
 
         <!-- ****** Header Area Start ****** -->
@@ -94,7 +38,7 @@
                             <div class="top_single_area d-flex align-items-center">
                                 <!-- Logo Area -->
                                 <div class="top_logo">
-                                    <a href="#">
+                                    <a href="index.html">
                                         <img src="img/core-img/logo.png" alt="" width="120" height="120">
                                     </a>
                                 </div>
@@ -620,106 +564,144 @@ function changeSizeModal(size, id) {
         <!-- ****** Offer Area End ****** -->
           <!-- ****** Popular Brands Area Start ****** -->
         <section class="karl-testimonials-area section_padding_100">
-            <div class="container">
-           <div class="row">
-            <div class="col-1">
-                <h5>jvhvh</h5>
-            </div>
-           </div>
-              
-
-            </div>
-        </section>
-        <!-- ****** Popular Brands Area End ****** -->
-            <!-- ****** Footer Area Start ****** -->
-        <footer class="footer_area">
-            <div class="container">
-                <div class="row">
-                    <!-- Single Footer Area Start -->
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <div class="single_footer_area">
-                            <div class="footer-logo">
-                                <img src="img/core-img/logo.png" alt="">
-                            </div>
-                           <div class="copywrite_text d-flex align-items-center">
-    <p>
-        &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with 
-        <i class="fa fa-heart-o" aria-hidden="true"></i> by <strong>Hashim Khan</strong> for 
-        <a href="#" target="_blank">HF Perfumes</a>
-    </p>
+           
+       
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+               
+              <div class="slider-box">
+                 <div class="slider-track" id="meri-suratain">
+        <!-- JS se images add hongi -->
+                </div>
+             </div>
+        </div>
+    </div>
 </div>
+           
+     
+        </section>
+          <!-- SLIDER k JS -->
+<script>
+const perfumePics = [
+    "img/product-img/insta-1.jpg",
+    "img/product-img/insta-2.jpg",
+    "img/product-img/insta-3.jpg",
+    "img/product-img/insta-4.jpg",
+    "img/product-img/insta-5.jpg",
+    "img/product-img/insta-6.jpg",
+    "img/product-img/insta-7.jpg",
+    "img/product-img/insta-8.jpg",
+    "img/product-img/insta-9.jpg",
+    "img/product-img/insta-10.jpg"
+];
 
-                        </div>
+const track = document.getElementById("meri-suratain");
+let picsHTML = "";
+perfumePics.forEach(src => {
+    picsHTML += `<img src="${src}" alt="Perfume">`;
+});
+track.innerHTML = picsHTML;
+
+let index = 0;
+function moveSlider() {
+    index++;
+    if (index > perfumePics.length - 4) { // ✅ ek time me 4 images
+        index = 0;
+    }
+    track.style.transform = `translateX(-${index * 215}px)`; // 200px img + 15px gap
+}
+setInterval(moveSlider, 2000); // ✅ har 2 sec me slide
+</script>
+        <!-- ****** Popular Brands Area End ****** -->
+
+
+
+
+        
+            <!-- ****** Footer Area Start ****** -->
+       <footer class="footer_area">
+    <div class="container">
+        <div class="row">
+            <!-- Logo & Copywrite -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="single_footer_area">
+                    <div class="footer-logo">
+                        <img src="img/core-img/logo.png" alt="">
                     </div>
-                    <!-- Single Footer Area Start -->
-                    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
-                        <div class="single_footer_area">
-                            <ul class="footer_widget_menu">
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Faq</a></li>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Single Footer Area Start -->
-                    <div class="col-12 col-sm-6 col-md-3 col-lg-2">
-                        <div class="single_footer_area">
-                            <ul class="footer_widget_menu">
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Shipping</a></li>
-                                <li><a href="#">Our Policies</a></li>
-                                <li><a href="#">Afiliates</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Single Footer Area Start -->
-                    <div class="col-12 col-lg-5">
-                        <div class="single_footer_area">
-                            <div class="footer_heading mb-30">
-                                <h6>Subscribe to our newsletter</h6>
-                            </div>
-                            <div class="subscribtion_form">
-                                <form action="#" method="post">
-                                    <input type="email" name="mail" class="mail" placeholder="Your email here">
-                                    <button type="submit" class="submit">Subscribe</button>
-                                </form>
-                            </div>
-                        </div>
+                    <div class="copywrite_text d-flex align-items-center">
+                        <p>
+                            &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with 
+                            <i class="fa fa-heart-o" aria-hidden="true"></i> by <strong>Hashim Khan</strong> for 
+                            <a href="#" target="_blank">HF Perfumes</a>
+                        </p>
                     </div>
                 </div>
-                <div class="line"></div>
+            </div>
 
-                <!-- Footer Bottom Area Start -->
-                <div class="footer_bottom_area">
-                  <div class="row">
-    <div class="col-12">
-        <div class="footer_social_area text-center">
-            <!-- WhatsApp (Green) -->
-            <a href="https://wa.me/923283562969" target="_blank" title="WhatsApp">
-                <i class="fa fa-whatsapp" aria-hidden="true" style="color: #25D366;"></i>
-            </a>
-            <!-- Facebook (Blue) -->
-            <a href="https://www.facebook.com/profile.php?id=61579088825586" target="_blank" title="Facebook">
-                <i class="fa fa-facebook" aria-hidden="true" style="color: #3b5998;"></i>
-            </a>
-            <!-- Instagram (Gradient simulated with purple) -->
-            <a href="https://www.instagram.com/hfperfumes_?igsh=cmVsMXFmamljanlq&utm_source=qr" target="_blank" title="Instagram">
-                <i class="fa fa-instagram" aria-hidden="true" style="color: #C13584;"></i>
-            </a>
-            <!-- WhatsApp Channel (Same Green) -->
-            <a href="https://whatsapp.com/channel/0029VbBDwbOFy7290f9Q6o10" target="_blank" title="WhatsApp Channel">
-                <i class="fa fa-bullhorn" aria-hidden="true" style="color: #25D366;"></i>
-            </a>
-        </div>
+            <!-- Quick Links -->
+            <div class="col-12 col-sm-6 col-md-3 col-lg-2">
+                <div class="single_footer_area" >
+                    <h6>Quick Links</h6>
+                    <ul class="footer_widget_menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+          <!-- About Us -->
+<div class="col-12 col-sm-6 col-md-3 col-lg-2">
+    <div class="single_footer_area">
+        <h6>About Us</h6>
+        <p class="copywrite_text"><em>HF Perfumes</em> — where elegance meets aroma. Discover scents crafted to linger in memories and define your style.</p>
     </div>
 </div>
 
 
+            <!-- Newsletter -->
+            <div class="col-12 col-lg-5">
+                <div class="single_footer_area">
+                    <div class="footer_heading mb-30">
+                        <h6>Subscribe to our newsletter</h6>
+                    </div>
+                    <div class="subscribtion_form">
+                        <form action="#" method="post">
+                            <input type="email" name="mail" class="mail" placeholder="Your email here">
+                            <button type="submit" class="submit">Subscribe</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </div>
+
+        <div class="line"></div>
+
+        <!-- Social Links -->
+        <div class="footer_bottom_area">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer_social_area text-center">
+                        <a href="https://wa.me/923283562969" target="_blank" title="WhatsApp">
+                            <i class="fa fa-whatsapp" aria-hidden="true" style="color: #25D366;"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61579088825586" target="_blank" title="Facebook">
+                            <i class="fa fa-facebook" aria-hidden="true" style="color: #3b5998;"></i>
+                        </a>
+                        <a href="https://www.instagram.com/hfperfumes_?igsh=cmVsMXFmamljanlq&utm_source=qr" target="_blank" title="Instagram">
+                            <i class="fa fa-instagram" aria-hidden="true" style="color: #C13584;"></i>
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029VbBDwbOFy7290f9Q6o10" target="_blank" title="WhatsApp Channel">
+                            <i class="fa fa-bullhorn" aria-hidden="true" style="color: #25D366;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
         <!-- ****** Footer Area End ****** -->
 </div>
    <!-- /.wrapper end -->
