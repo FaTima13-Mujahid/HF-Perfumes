@@ -561,6 +561,21 @@ function changeSizeModal(size, id) {
         </section>
           <!-- SLIDER k JS -->
 <script>
+    // Scroll to Top Button Script
+let scrollBtn = document.getElementById("scrollTopBtn");
+
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    scrollBtn.style.display = "block";
+  } else {
+    scrollBtn.style.display = "none";
+  }
+};
+
+function topFunction() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 const perfumePics = [
     "img/product-img/insta-1.jpg",
     "img/product-img/insta-2.jpg",
@@ -684,6 +699,8 @@ setInterval(moveSlider, 2000); // ✅ har 2 sec me slide
 </div>
    <!-- /.wrapper end -->
 
+<!-- Scroll to Top Button -->
+<button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
