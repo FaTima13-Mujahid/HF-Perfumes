@@ -303,12 +303,24 @@ img {
     margin-bottom: 50px;
     position: relative;
     z-index: 1;
+    font-family: 'Playfair Display', serif; /* Elegant font */
+  font-weight: bold;
+  font-size: 32px;
+  color: #030d1c;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
 }
 
 .section_heading h2 {
-    font-size: 48px;
-    margin-bottom: 0;
-    text-transform: uppercase;
+   
+    font-family: 'Playfair Display', serif; /* Elegant font */
+  font-weight: bold;
+  font-size: 32px;
+  color: #87888a;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
 }
 
 .section_heading.text-left {
